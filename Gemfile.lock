@@ -193,10 +193,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   byebug
   coffee-rails (~> 4.2)
   devise
-  factory_girl_rails
+  factory_girl_rails (~> 4.0)
   faker
   jbuilder (~> 2.5)
   jquery-rails
