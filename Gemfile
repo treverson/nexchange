@@ -38,6 +38,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   #added by ben
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'factory_girl_rails', "~> 4.0"
