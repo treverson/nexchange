@@ -5,6 +5,5 @@ class CreateGroupings < ActiveRecord::Migration[5.0]
       t.belongs_to :groups, index: true
       t.timestamps
     end
-      add_foreign_key :groups, :users
   end
 end
