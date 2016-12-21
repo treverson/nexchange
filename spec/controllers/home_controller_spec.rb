@@ -13,8 +13,6 @@ RSpec.describe HomeController, type: :controller do
       sign_out user
       expect(subject.current_user).to eq(nil)
     end
-
-
   end
 
   describe "views" do
@@ -34,5 +32,9 @@ RSpec.describe HomeController, type: :controller do
     end
   end
 
+  describe "groups-interaction" do
+    describe "groups CRUD" do
+    end
+  end
 
 end

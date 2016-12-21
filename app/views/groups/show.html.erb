@@ -1,0 +1,14 @@
+<p>
+  <strong>Title:</strong>
+  <%= @group.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @group.description %>
+</p>
+
+<%= link_to 'Edit this group', edit_group_path(@group) %><br>
+<br>
+<%= link_to 'All the groups', groups_path %><br>
+<br>
