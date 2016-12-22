@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  
   def index
     @groups = Group.all
   end
@@ -11,10 +12,6 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
-  def edit
-    @group = Group.find(params[:id])
-  end
-
   def create
     @group = Group.new(group_params)
 
@@ -23,6 +20,10 @@ class GroupsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+    @group = Group.find(params[:id])
   end
 
   def update
