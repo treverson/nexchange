@@ -7,8 +7,11 @@
   <strong>Description:</strong>
   <%= @group.description %>
 </p>
-
+<%= link_to 'Add me to this group', group_add_user_path(@group), method: :post %><br>
+<br>
+<%= link_to 'Remove me from this group', group_remove_user_path(@group), method: :post %><br>
+<br>
 <%= link_to 'Edit this group', edit_group_path(@group) %><br>
 <br>
-<%= link_to 'All the groups', groups_path %><br>
+<%= link_to 'List all the groups', groups_path %><br>
 <br>

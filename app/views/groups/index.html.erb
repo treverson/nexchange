@@ -12,6 +12,8 @@
       <td><%= group.description %></td>
       <td><%= group.users.count %></td>
       <td><%= link_to 'Show', group_path(group) %></td>
+      <td><%= link_to 'Add me to this group', group_add_user_path(group), method: :post %></td>
+      <td><%= link_to 'Remove me from this group', group_remove_user_path(group), method: :post %></td>
       <td><%= link_to 'Edit', edit_group_path(group) %></td>
       <td><%= link_to 'Destroy', group_path(group),
               method: :delete,
