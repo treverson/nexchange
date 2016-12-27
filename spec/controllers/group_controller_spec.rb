@@ -27,7 +27,7 @@ let(:user) { create(:user) }
         expect(response).to render_template :show
       end
 
-      it "assigns grou to @group" do
+      it "assigns group to @group" do
         get :show, params: {id: group.id}
         expect(assigns(:group)).to eq(group)
       end
