@@ -31,10 +31,4 @@ RSpec.describe HomeController, type: :controller do
       end
     end
   end
-
-  describe "groups-interaction" do
-    describe "groups CRUD" do
-    end
-  end
-
 end

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :group do
-    title "MyString"
-    description "MyText"
+    title "MyTitleString"
+    description "My Description that is a text field rather than a string, which is still technically a string"
   end
 end
