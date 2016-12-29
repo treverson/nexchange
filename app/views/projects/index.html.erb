@@ -1,0 +1,43 @@
+<h1>All Group Projects</h1>
+<%= link_to 'new group-project', new_project_path %>
+<br><br>
+<table>
+  <tr>
+    <th>Group</th>
+    <th>Project Title</th>
+    <th>Project Description</th>
+  </tr>
+<% @projects.where(projectable_type: "Group").find_each do |project| %>
+  <tr>
+    <td><%= %> </td>
+    <td><%=project.title %> </td>
+    <td><%=project.description %> </td>
+    <td><%= link_to 'Show', project_path(project) %></td>
+    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <td><%= link_to 'Destroy', project_path(project),method: :delete,data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+  <% end %>
+</table>
+
+<h1>All User Projects</h1>
+<%= link_to 'new user-project', new_project_path %>
+<br><br>
+<table>
+  <tr>
+    <th>User</th>
+    <th>Project Title</th>
+    <th>Project description</th>
+  </tr>
+  <% @projects.where(projectable_type: "User").find_each do |project| %>
+  <tr>
+    <td><%= %> </td>
+    <td><%=project.title %> </td>
+    <td><%=project.description %> </td>
+    <td><%= link_to 'Show', project_path(project) %></td>
+    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <td><%= link_to 'Destroy', project_path(project),method: :delete,data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+  <% end %>
+</table>
+<br>
+<br>

@@ -1,17 +1,46 @@
-<p>
-  <strong>Title:</strong>
-  <%= @group.title %>
-</p>
+<h1> <%= @group.title %></h1>
+<p><%= @group.description %></p>
+<ul>
+<li><%= link_to 'Edit this group', edit_group_path(@group) %></li>
+<li><%= link_to 'List all the groups', groups_path %></li>
+</ul>
 
-<p>
-  <strong>Description:</strong>
-  <%= @group.description %>
-</p>
-<%= link_to 'Add me to this group', group_add_user_path(@group), method: :post %><br>
+<h2>This group has <%= @group.projects.count %> projects</h2>
+<ul>
+<li><%= link_to 'new group project', new_project_path%><br></li>
+</ul>
 <br>
-<%= link_to 'Remove me from this group', group_remove_user_path(@group), method: :post %><br>
-<br>
-<%= link_to 'Edit this group', edit_group_path(@group) %><br>
-<br>
-<%= link_to 'List all the groups', groups_path %><br>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+  </tr>
+  <% @group.projects.each do |project| %>
+  <tr>
+    <td><%= project.title %></td>
+    <td><%= project.description %></td>
+    <td><%= link_to 'Show', project_path(project)%></td>
+    <td><%= link_to 'Edit', edit_project_path(project)%></td>
+    <td><%= link_to 'Destroy', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+  <% end %>
+</table>
+
+<h2>This group has <%= @group.users.count %> users</h2>
+<ul>
+<li><%= link_to 'Add me to this group', group_add_user_path(@group), method: :post %></li>
+<li><%= link_to 'Remove me from this group', group_remove_user_path(@group), method: :post %></li>
+</ul>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+  <% @group.users.each do |user| %>
+    <tr>
+      <td><%= user.name%></td>
+      <td><%= user.email%></td>
+    </tr>
+  <% end %>
+</table>
 <br>

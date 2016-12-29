@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NExchange</title>
+    <title>The N.Exchange</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,7 +9,6 @@
   </head>
 
   <body>
-    <%= yield %>
      <% if user_signed_in? %>
        Signed in as: <strong><%= current_user.email %></strong> |
        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> - <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
@@ -18,5 +17,13 @@
        <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %> -
        <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %>
      <% end %>
+     <ul class=navbar>
+       <li><%=link_to 'Home Page', root_path %> </li>
+       <li><%=link_to 'Projects Page', projects_path %> </li>
+       <li><%=link_to 'Groups Page', groups_path %> </li>
+     </ul>
+     <hr>
+     <%= yield %>
+     <hr>
   </body>
 </html>

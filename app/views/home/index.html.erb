@@ -1,5 +1,23 @@
 <br>
    <h1>welcome to the n.exchange</h1>
    <p>the next change is upon us</p>
+   <h1>All Users</h1>
+   <% @users.each do |user| %>
+   <ul>
+     <li><%=user.name %> </li>
+   </ul>
+   <% end %>
 
-   <%= link_to 'Groups', controller: 'groups' %>
+   <h1>All Groups</h1>
+   <% @groups.each do |group| %>
+   <ul>
+     <li><%=group.title %> </li>
+   </ul>
+   <% end %>
+
+   <h1>All Projects</h1>
+   <% @projects.each do |project| %>
+   <ul>
+     <li><%=project.title %> </li>
+   </ul>
+   <% end %>
