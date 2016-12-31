@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
+before_action :load_projectable
 
   def index
+    @projects = @projectable.projects
     @user = current_user
-    @projects = Project.all
     @users = User.all
     @groups = Group.all
   end
@@ -12,13 +13,16 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @parent = parent
+    @project = @projectable.projects.new
   end
-  
+
   def create
-    @parent = parent
-    @project = @parent.projects.new(project_params)
-    @project.save
+    @project = @projectable.projects.new(project_params)
+      if @project.save
+        redirect_to [@projectable, :projects], notice: 'Project created'
+      else
+        render :new
+      end
   end
 
   def edit
@@ -36,12 +40,14 @@ class ProjectsController < ApplicationController
   end
 
   private
-    def parent
-      User.find params[:user_id] if params[:user_id]
-      Group.find params[:group_id] if params[:group_id]
-    end
 
     def project_params
       params.require(:project).permit(:title, :description)
     end
+
+    def load_projectable
+      resource, id = request.path.split('/')[1,2]
+      @projectable = resource.singularize.classify.constantize.find(id)
+    end
+
 end
