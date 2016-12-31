@@ -6,6 +6,5 @@ class User < ApplicationRecord
 
   has_many :groupings
   has_many :groups, through: :groupings
-  has_many :projects, as: :projectable, dependent: :destroy
 
 end
