@@ -1,5 +1,5 @@
 <h1>All Group Projects</h1>
-<%= link_to 'new group-project', new_group_path %>
+<%= link_to 'new group-project', new_group_project_path %>
 <br><br>
 <table>
   <tr>
@@ -12,15 +12,15 @@
     <td><%=project.projectable.title %> </td>
     <td><%=project.title %> </td>
     <td><%=project.description %> </td>
-    <td><%= link_to 'Show', project_path(project) %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project_path(project),method: :delete,data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', group_projects_path(@project) %></td>
+    <td><%= link_to 'Edit', edit_project_path(@project) %></td>
+    <td><%= link_to 'Delete', project_path(@project),method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
   <% end %>
 </table>
 
 <h1>All User Projects</h1>
-<%= link_to 'new user-project' %>
+<%= link_to 'new user-project', new_user_projects_path %>
 <br><br>
 <table>
   <tr>
@@ -33,9 +33,9 @@
     <td><%=project.projectable.email %> </td>
     <td><%=project.title %> </td>
     <td><%=project.description %> </td>
-    <td><%= link_to 'Show', project_path(project) %></td>
+    <td><%= link_to 'Show', user_projects_path(project) %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project_path(project),method: :delete,data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', project_path(project),method: :delete,data: { confirm: 'Are you sure?' } %></td>
   </tr>
   <% end %>
 </table>
