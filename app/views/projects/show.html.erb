@@ -1,6 +1,6 @@
 <h1> <%= @project.title %></h1>
 <p> <%= @project.description %></p>
 <ul>
-  <li> <%= link_to 'Edit this project', edit_project_path(@project) %></li><br>
-  <li> <%= link_to 'Back to all the projects', projects_path %></li>
+    <%= link_to 'Edit this project', edit_project_path(@project)%>
+    <%= link_to 'Delete this project', project_path(@project)%>
 </ul>

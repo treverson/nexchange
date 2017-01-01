@@ -1,11 +1,8 @@
 class ProjectsController < ApplicationController
-before_action :load_projectable
+  before_action :find_projectable
 
   def index
-    @projects = @projectable.projects
-    @user = current_user
-    @users = User.all
-    @groups = Group.all
+    @projects = Project.all
   end
 
   def show
@@ -13,16 +10,21 @@ before_action :load_projectable
   end
 
   def new
+    @projectable = find_projectable
     @project = @projectable.projects.new
   end
 
   def create
+    @projectable = find_projectable
     @project = @projectable.projects.new(project_params)
-      if @project.save
-        redirect_to [@projectable, :projects], notice: 'Project created'
-      else
-        render :new
-      end
+    # @project.creator << current_user
+
+    if @project.save
+      redirect_to @project.projectable
+    else
+      render :new
+    end
+
   end
 
   def edit
@@ -31,23 +33,33 @@ before_action :load_projectable
 
   def update
     @project = Project.find(params[:id])
+
+    if @project.update(project_params)
+      redirect_to @project.projectable
+    else
+      render 'edit'
+    end
   end
 
-  def delete
+  def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to projects_path
+
+    redirect_to @project.projectable
+
   end
 
   private
+    def find_projectable
+      if params[:group_id]
+        @projectable = Group.find(params[:group_id])
+      elsif params[:user_id]
+        @projectable = User.find(params[:user_id])
+      end
+    end
 
     def project_params
       params.require(:project).permit(:title, :description)
-    end
-
-    def load_projectable
-      resource, id = request.path.split('/')[1,2]
-      @projectable = resource.singularize.classify.constantize.find(id)
     end
 
 end
