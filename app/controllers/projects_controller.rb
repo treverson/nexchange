@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    @user = current_user
   end
 
   def show
@@ -12,6 +13,7 @@ class ProjectsController < ApplicationController
   def new
     @projectable = find_projectable
     @project = @projectable.projects.new
+
   end
 
   def create
