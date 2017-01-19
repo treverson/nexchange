@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-    @user = current_user
   end
 
   def show
@@ -22,7 +21,7 @@ class ProjectsController < ApplicationController
     # @project.creator << current_user
 
     if @project.save
-      redirect_to @project.projectable
+      redirect_to @project
     else
       render :new
     end

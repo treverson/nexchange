@@ -1,9 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe GroupsController, type: :controller do
+RSpec.describe ProjectsController, type: :controller do
+let(:project) { create(:project) }
 let(:user_project) { create(:user_project) }
 let(:group_project) { create(:group_project) }
-let(:user) { create(:user) }
+let(:user)    { create(:user) }
+let(:group)   { create(:group) }
 
   context "projects CRUD" do
     before do
@@ -11,25 +13,25 @@ let(:user) { create(:user) }
     end
 
     describe "GET index" do
-      it "returns http success" do
-        get :index
-        expect(response).to have_http_status(:success)
-      end
+        it "returns http success" do
+          get :index
+          expect(response).to have_http_status(:success)
+        end
     end
 
     describe "GET show" do
       it "returns http success" do
-        get :show, params: {id: project.id}
+        get :show, params: { id: 1 }
         expect(response).to have_http_status(:success)
       end
 
       it "renders the #show view" do
-        get :show, params: {id: project.id}
+        get :show, params: { id: 1 }
         expect(response).to render_template :show
       end
 
       it "assigns project to @project" do
-        get :show, params: {id: project.id}
+        get :show, params: { id: 1 }
         expect(assigns(:project)).to eq(project)
       end
     end
