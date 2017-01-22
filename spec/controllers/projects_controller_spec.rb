@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
-let(:project) { create(:project) }
-let(:user_project) { create(:user_project) }
-let(:group_project) { create(:group_project) }
+let(:path) { polymorphic_path(projectable) + "/projects" }
+let(:this_project) { create(:project) }
 let(:user)    { create(:user) }
 let(:group)   { create(:group) }
 
   context "projects CRUD" do
     before do
       sign_in user
+      group
     end
 
     describe "GET index" do
@@ -21,84 +21,85 @@ let(:group)   { create(:group) }
 
     describe "GET show" do
       it "returns http success" do
-        get :show, params: { id: 1 }
+        get :show, id: this_project.id
         expect(response).to have_http_status(:success)
       end
 
       it "renders the #show view" do
-        get :show, params: { id: 1 }
+        get :show, id: this_project.id
         expect(response).to render_template :show
       end
 
       it "assigns project to @project" do
-        get :show, params: { id: 1 }
-        expect(assigns(:project)).to eq(project)
+        get :show, id: this_project.id
+        expect(assigns(:project)).to eq(this_project)
       end
     end
 
-    describe "GET new" do
+    describe "GET new user project" do
       it "returns http success" do
-        get :new
+        get :new, {user_id: user.id, id: this_project.id}
         expect(response).to have_http_status(:success)
       end
 
       it "renders the #new view" do
-        get :new, params: {id: project.id}
+        get :new, {user_id: user.id, id: this_project.id}
         expect(response).to render_template :new
       end
 
       it "instantiates @project" do
-        get :new, params: {id: project.id}
+      get :new, {user_id: user.id, id: this_project.id}
         expect(assigns).to_not be_nil
       end
     end
 
-    describe "group_project create" do
-      it "increases the number of group-projects by 1" do
-        expect{ post :create, group_project: {title: "One More Title", description: "One More Description"} }.to change(Group, :count).by(1)
+    describe "GET new group project" do
+      it "returns http success" do
+        get :new, {group_id: group.id, id: this_project.id}
+        expect(response).to have_http_status(:success)
       end
 
-      it "assigns the new project to @project" do
-         post :create, project: {title: "One More Title", description: "One More Description"}
-         expect(assigns(:project)).to eq Group.last
+      it "renders the #new view" do
+        get :new, {group_id: group.id, id: this_project.id}
+        expect(response).to render_template :new
       end
 
-      it "redirects to the new project" do
-        post :create, project: {title: "One More Title", description: "One More Description"}
-        expect(response).to redirect_to [Group.last]
+      it "instantiates @project" do
+        get :new, {group_id: group.id, id: this_project.id}
+        expect(assigns).to_not be_nil
       end
     end
 
     describe "GET edit" do
       it "returns http success" do
-        get :edit, params: {id: project.id}
+        get :edit, id: this_project.id
         expect(response).to have_http_status(:success)
       end
 
       it "renders the #edit view" do
-        get :edit, params: {id: project.id}
+        get :edit, id: this_project.id
         expect(response).to render_template :edit
       end
 
       it "assigns project to be updated to @project" do
-        get :edit, params: {id: project.id}
+        get :edit, id: this_project.id
         project_instance = assigns(:project)
 
-        expect(project_instance.id).to eq project.id
-        expect(project_instance.title).to eq project.title
-        expect(project_instance.description).to eq project.description
+        expect(project_instance.id).to eq this_project.id
+        expect(project_instance.title).to eq this_project.title
+        expect(project_instance.description).to eq this_project.description
       end
     end
 
-    describe "GET update" do
+    describe "PUT update" do
       it "updates project" do
         new_title = "New Title"
         new_description = "New Description"
-        put :update, id: project.id, project: {title: new_title, description: new_description}
+        put :update, id: this_project.id, project: {title: new_title, description: new_description}
 
         updated_project = assigns(:project)
 
-        expect(updated_project.id).to eq project.id
+        expect(updated_project.id).to eq this_project.id
         expect(updated_project.title).to eq new_title
         expect(updated_project.description).to eq new_description
       end
@@ -106,14 +107,14 @@ let(:group)   { create(:group) }
 
     describe "GET destroy" do
       it "deletes the project" do
-        delete :destroy, id: project.id
-        count = Group.where({id: project.id}).size
+        delete :destroy, id: this_project.id
+        count = Project.where({id: this_project.id}).size
         expect(count).to eq 0
       end
 
       it "redirects to projects index" do
-        delete :destroy, id: project.id
-        expect(response).to redirect_to projects_path
+        delete :destroy, id: this_project.id
+        expect(response).to redirect_to group_path
       end
     end
   end

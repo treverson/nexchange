@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>The N.Exchange</title>
+    <title>The nexchange</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -19,7 +19,9 @@
      <% end %>
      <ul class=navbar>
        <li><%=link_to 'Home Page', root_path %> </li>
+       <li><%=link_to 'Profile Page', root_path %> </li>
        <li><%=link_to 'Groups Page', groups_path %> </li>
+       <li><%=link_to 'Projects Page', projects_path %> </li>
      </ul>
      <hr>
      <%= yield %>
