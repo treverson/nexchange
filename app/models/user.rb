@@ -10,4 +10,8 @@ class User < ApplicationRecord
   has_many  :groups, through: :groupings
   has_many  :projects, as: :projectable, dependent: :destroy
 
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :name, presence: true
+
 end

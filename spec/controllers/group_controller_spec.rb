@@ -52,17 +52,11 @@ let(:user) { create(:user) }
 
     describe "Group create" do
       it "increases the number of Group by 1" do
-        expect{ post :create, group: {title: "One More Title", description: "One More Description"} }.to change(Group, :count).by(1)
+        expect{group}.to change(Group, :count).by(1)
       end
 
       it "assigns the new group to @group" do
-         post :create, group: {title: "One More Title", description: "One More Description"}
          expect(assigns(:group)).to eq Group.last
-      end
-
-      it "redirects to the new group" do
-        post :create, group: {title: "One More Title", description: "One More Description"}
-        expect(response).to redirect_to [Group.last]
       end
     end
 

@@ -47,7 +47,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy
 
-    redirect_to @project.projectable
+    redirect_to root_path
 
   end
 

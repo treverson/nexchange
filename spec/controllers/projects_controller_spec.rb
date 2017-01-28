@@ -114,7 +114,7 @@ let(:group)   { create(:group) }
 
       it "redirects to projects index" do
         delete :destroy, id: this_project.id
-        expect(response).to redirect_to group_path
+        expect(response).to redirect_to root_path
       end
     end
   end

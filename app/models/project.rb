@@ -3,4 +3,7 @@ class Project < ApplicationRecord
 
   validates :title, presence: true
   validates :description, presence: true
+  # validates :creator, presence: true
+  validates :projectable_type, presence: true
+  validates :projectable_id, presence: true
 end
